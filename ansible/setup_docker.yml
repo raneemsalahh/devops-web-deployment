@@ -1,6 +1,6 @@
 ---
 - name: Install and configure Docker on Ubuntu VM
-  hosts: webservers
+  hosts: all
   become: yes
   tasks:
     - name: Update apt cache
@@ -41,8 +41,8 @@
         state: started
         enabled: yes
 
-    - name: Add user to docker group
-      user:
-        name: raneem
-        groups: docker
-        append: yes
+     - name: Add the current user to docker group
+    user:
+      name: "{{ ansible_user }}"
+      groups: docker
+      append: yes
